@@ -260,7 +260,7 @@ class System {
     public static function requireDirectory($directory, $recursive = false) {
         Preconditions::checkNotEmptyError($directory);
 
-        $directory = Strings::append($directory, "/");
+        $directory = Strings::append("/", $directory);
         $files = scandir($directory);
         foreach ($files as $file) {
             $_file = $file;

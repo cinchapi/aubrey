@@ -18,11 +18,11 @@ class Strings {
     /**
      * Add $append to the end of $input if $input does not already end with $append.
      *
-     * @param string $input
      * @param string $append
+     * @param string $input
      * @return string the possibly altered $input
      */
-    public static function append($input, $append) {
+    public static function append($append, $input) {
         return Strings::endsWith($append, $input) ? $input : $input . $append;
     }
 
@@ -278,11 +278,11 @@ class Strings {
      * Add $append to the end of $input if and only if <code>static::endsWith($input, $append)</code>
      * is <code>false</code>.
      *
-     * @param string $input
      * @param string $prepend
+     * @param string $input
      * @return string the possibly altered <code>$input</code>.
      */
-    public static function prepend($input, $prepend) {
+    public static function prepend($prepend, $input) {
         return Strings::startsWith($prepend, $input) ? $input : $prepend . $input;
     }
 

@@ -302,7 +302,6 @@ class Aubrey {
                 "$1$2$rangeSeparator$3", $criteria);
         $criteria = preg_replace("/'([a-zA-Z0-9]+)([\s])+([a-zA-Z0-9]+)'[\s]*/i",
                 "$1$spaceSeperator$3", $criteria);
-        println($criteria);
         foreach (self::$_SELECTION_CRITERIA_OPERATORS as $operator) {
             $criteria = str_ireplace(" $operator", $operator, $criteria);
             $criteria = str_ireplace("$operator ", $operator, $criteria);
