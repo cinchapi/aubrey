@@ -258,9 +258,9 @@ class System {
      * @param boolean $recursive (optional) flag to require subdirectories
      */
     public static function requireDirectory($directory, $recursive = false) {
-        Preconditions::checkEmptyError($directory);
+        Preconditions::checkNotEmptyError($directory);
 
-        $directory = Strings::append("/", $directory);
+        $directory = Strings::append($directory, "/");
         $files = scandir($directory);
         foreach ($files as $file) {
             $_file = $file;

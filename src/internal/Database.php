@@ -4,6 +4,8 @@ namespace org\cinchapi\aubrey\internal;
 
 require_once \dirname(__FILE__) . '/../require.php';
 
+use \PDO;
+
 /**
  * Contains static utilities that facilitate interactions with the underlying
  * database.

@@ -28,7 +28,7 @@ define('DB_HOST', 'localhost');
  * Database name
  * @var string
  */
-define('DB_NAME', 'koncourse3');
+define('DB_NAME', 'aubrey');
 
 /**
  * Database username
@@ -91,24 +91,24 @@ define('TEMP_PROCESS_FILE_DIRECTORY', '/Users/jnelson');
  * Search database host
 * @var string
 */
-define('SEARCH_DB_HOST', '');
+define('SEARCH_DB_HOST', 'localhost');
 
 /**
  * Search database name
  * @var string
  */
-define('SEARCH_DB_NAME', 'koncourse_search');
+define('SEARCH_DB_NAME', 'aubrey_search');
 
 /**
  * Search database username
  * @var string
  */
-define('SEARCH_DB_USER', '');
+define('SEARCH_DB_USER', 'root');
 
 /**
  * Search database password
  * @var string
  */
-define('SEARCH_DB_PASS', '');
+define('SEARCH_DB_PASS', 'root');
 
 ?>

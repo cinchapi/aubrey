@@ -238,7 +238,6 @@ class Aubrey {
      * @param string $property
      * @param mixed $value
      * @param boolean $index (optional) flag to indicate that the property should be indexed after appending the value
-     * @throws Koncourse_Std_Err_IllegalArgumentException
      * @return boolean
      * @since 1.1.0
      */
@@ -288,7 +287,6 @@ class Aubrey {
      * Breakdown a valid selection criteria using the Shunting-yard algorithin
      * @see http://en.wikipedia.org/wiki/Shunting-yard_algorithm
      * @param string $criteria
-     * @throws Koncourse_Std_Err_Exception
      * @return array $criteria in reverse polish notation {@link http://en.wikipedia.org/wiki/Reverse_Polish_notation}
      * @since 1.1.0
      */
@@ -1026,7 +1024,7 @@ class Aubrey {
                 else if (is_numeric($value) && !is_float_value($value)) {//check for decimal points
                     return self::getValueType((int) $value);
                 }
-                else if (Koncourse_Std_DateTime::isDateTimeString($value)) {
+                else if (util\Time::isDateTimeString($value)) {
                     return self::$VALUE_TYPES['datetime'];
                 }
                 else if (strtolower($value) == "false" || strtolower($value) == "true") {
@@ -1057,7 +1055,6 @@ class Aubrey {
     /**
      * Check to see if the version of the object that is possibly stored in the cache is stale
      * @param int $object
-     * @throws Koncourse_Std_Err_IllegalArgumentException
      * @return boolean
      * @since 1.1.0
      */
@@ -1157,7 +1154,7 @@ class Aubrey {
             $trackRevisionsForCreatedObjects = false, $logFile = null,
             $externalSource = null) {
         set_time_limit(0); //prevent script execution timeout
-        $start = Koncourse_Std_DateTime::microtime();
+        $start = util\Time::now();
         $externalSource = empty($externalSource) ? "the external data source" : $externalSource;
         $logFile = empty($logFile) ? "importsync" . time() . "-" . md5($externalSource)
                     : $logFile;
@@ -1266,12 +1263,11 @@ class Aubrey {
      * @param string $enclosure (optional) default is double quote
      * @param string $escape (optional) default is backslash
      * @param string $logFile (optional) specify a logfile for the import
-     * @throws Koncourse_Std_Err_Exception
      * @return array array of created object ids
      * @since 1.1.0
      */
     private static function importCsvFile($file, $class,
-            $callable = "Koncourse::setPropertyValue", $trackRevisions = false,
+            $callable = "Aubrey::setPropertyValue", $trackRevisions = false,
             $delimeter = ",", $enclosure = "\"", $escape = "\\", $logFile = null) {
         set_time_limit(0);
         $handle = fopen($file, "r");
@@ -1543,7 +1539,6 @@ class Aubrey {
      * @param int $object
      * @param string $properties (optional) comma separated list of properties to load. By default, all the object's properties will be loaded
      * @param boolean $byPassCache (optional) flag to indicate that the object should be loaded from the database and not the cache
-     * @throws Koncourse_Std_Err_Exception
      * @return mixed array if and only if two or more properties are requested by the caller. If the caller requests a single property, the value
      * of that single property is returned, if it exists.  
      * @since 1.1.0
@@ -1836,7 +1831,6 @@ class Aubrey {
      * @param string $property
      * @param mixed $value
      * @param boolean $index (optional) flag to indicate that the property should be indexed after the value is set
-     * @throws Koncourse_Std_Err_IllegalArgumentException
      * @return boolean
      * @since 1.1.0
      */

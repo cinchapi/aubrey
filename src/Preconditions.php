@@ -38,7 +38,7 @@ class Preconditions {
      */
     public static function checkNotEmptyError($arg) {
         if (is_string($arg)) {
-            self::checkArgumentError($arg != "" || !is_null($arg),
+            self::checkArgumentError($arg == "" || is_null($arg),
                     self::$EMPTY_ARG_ERROR_MSG);
         }
         else {

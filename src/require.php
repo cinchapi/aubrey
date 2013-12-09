@@ -15,6 +15,8 @@ set_error_handler("handleError");
 register_shutdown_function('handleShutdown');
 spl_autoload_register('autoload');
 
+\org\cinchapi\aubrey\util\System::requireDirectory(\dirname(__FILE__)."/internal");
+
 /**
  * Autoload $class from this directory.
  * @param string $class

@@ -80,6 +80,27 @@ class Time {
         return $components;
     }
 
+    /**
+     * Determine if an english phrase represents a date/time.
+     * @param string $string
+     * @return boolean
+     * @version 1.1.0
+     */
+    static function isDateTimeString($string) {
+        $minDateTimeLength = 3;
+        if (strlen($string) < $minDateTimeLength) {
+            return false;
+        }
+        $result = array();
+        $time = strtotime($string);
+        if ($time) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
 
 ?>
