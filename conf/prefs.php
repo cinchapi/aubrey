@@ -7,7 +7,7 @@
 /**
  * Cache server host
  */
-define('CACHE_HOST', '');
+define('CACHE_HOST', 'localhost');
 
 /**
  * Cache server port; the default for memcache is 11211

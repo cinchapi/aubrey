@@ -2,6 +2,8 @@
 
 namespace org\cinchapi\aubrey;
 
+use \PDO;
+
 require_once \dirname(__FILE__) . '/require.php';
 
 /**

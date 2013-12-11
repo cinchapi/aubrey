@@ -18,8 +18,9 @@ class Cache {
      * @since 1.0.0
      */
     public static function flush($host = CACHE_HOST, $port = CACHE_PORT) {
-        $cache = self::getHandler($host, $port);
-        return memcache_flush($cache);
+        return false;
+//        $cache = self::getHandler($host, $port);
+//        return \memcache_flush($cache);
     }
 
     /**
@@ -35,20 +36,21 @@ class Cache {
      */
     public static function get($key, $host = CACHE_HOST, $port = CACHE_PORT,
             $accessToken = null, $throwExceptionIfKeyNotFound = false) {
-        $key = self::translateKey($key, $accessToken);
-        $cache = self::getHandler($host, $port);
-        $value = memcache_get($cache, $key);
-        if ($value == false) {
-            if ($throwExceptionIfKeyNotFound) {
-                memcache_close($cache);
-                throw new \Exception("Could not find key $key in the cache.");
-            }
-            else {
-                $value = null;
-            }
-        }
-        memcache_close($cache);
-        return $value;
+//        $key = self::translateKey($key, $accessToken);
+//        $cache = self::getHandler($host, $port);
+//        $value = \memcache_get($cache, $key);
+//        if ($value == false) {
+//            if ($throwExceptionIfKeyNotFound) {
+//                memcache_close($cache);
+//                throw new \Exception("Could not find key $key in the cache.");
+//            }
+//            else {
+//                $value = null;
+//            }
+//        }
+//        \memcache_close($cache);
+//        return $value;
+        return null;
     }
 
     /**
@@ -63,10 +65,10 @@ class Cache {
     private static function getHandler($host, $port,
             $makePersistentConnection = true) {
         if ($makePersistentConnection) {
-            $cache = memcache_pconnect($host, $port);
+            $cache = \memcache_pconnect($host, $port);
         }
         else {
-            $cache = memcache_connect($host, $port);
+            $cache = \memcache_connect($host, $port);
         }
         if ($cache == false) {
             throw new \Exception("Could not connect to the cache server at $host on $port");
@@ -82,7 +84,7 @@ class Cache {
      * @since 1.0.0
      */
     public static function getServerStatus($host = CACHE_HOST, $port = CACHE_PORT) {
-        return memcache_get_server_status(self::getHandler($host, $port), $host,
+        return \memcache_get_server_status(self::getHandler($host, $port), $host,
                 $port);
     }
 
@@ -102,33 +104,34 @@ class Cache {
     public static function put($key, $value, $timeUntilExpirationInSeconds = 3600,
             $host = CACHE_HOST, $port = CACHE_PORT,
             $doNotOverwriteExistingValueForKey = false, $accessToken = null) {
-        $key = self::translateKey($key, $accessToken);
-        if (is_bool($value) || is_int($value) || is_float($value)) {
-            $compress = FALSE;
-        }
-        else {
-            $compress = MEMCACHE_COMPRESSED;
-        }
-        $cache = self::getHandler($host, $port);
-        if (!$doNotOverwriteExistingValueForKey) {
-            $added = memcache_set($cache, $key, $value, $compress,
-                    $timeUntilExpirationInSeconds);
-            memcache_close($cache);
-            if (!$added) {
-                $value = print_r($value, TRUE);
-                throw new \Exception("Could not add key $key with value $value to the cache.");
-            }
-        }
-        else {
-            $added = memcache_add($cache, $key, $value, $compress,
-                    $timeUntilExpirationInSeconds);
-            memcache_close($cache);
-            if (!$added) {
-                $value = print_r($value, TRUE);
-                throw new \Exception("Could not add key $key with value $value to the cache. Its possible that $key may already have a value in the cache");
-            }
-        }
-        return true;
+//        $key = self::translateKey($key, $accessToken);
+//        if (is_bool($value) || is_int($value) || is_float($value)) {
+//            $compress = FALSE;
+//        }
+//        else {
+//            $compress = MEMCACHE_COMPRESSED;
+//        }
+//        $cache = self::getHandler($host, $port);
+//        if (!$doNotOverwriteExistingValueForKey) {
+//            $added = \memcache_set($cache, $key, $value, $compress,
+//                    $timeUntilExpirationInSeconds);
+//            \memcache_close($cache);
+//            if (!$added) {
+//                $value = print_r($value, TRUE);
+//                throw new \Exception("Could not add key $key with value $value to the cache.");
+//            }
+//        }
+//        else {
+//            $added = \memcache_add($cache, $key, $value, $compress,
+//                    $timeUntilExpirationInSeconds);
+//            \memcache_close($cache);
+//            if (!$added) {
+//                $value = print_r($value, TRUE);
+//                throw new \Exception("Could not add key $key with value $value to the cache. Its possible that $key may already have a value in the cache");
+//            }
+//        }
+//        return true;
+        return false;
     }
 
     /**
@@ -143,16 +146,17 @@ class Cache {
      */
     public static function remove($key, $host = CACHE_HOST, $port = CACHE_PORT,
             $accessToken = null) {
-        $key = self::translateKey($key, $accessToken);
-        $cache = self::getHandler($host, $port);
-        if (!memcache_delete($cache, $key)) {
-            if (!memcache_set($cache, $key, null, MEMCACHE_COMPRESSED, -1)) {
-                memcache_close($cache);
-                throw new \Exception("Could not delete key $key from the cache.");
-            }
-        }
-        memcache_close($cache);
-        return TRUE;
+//        $key = self::translateKey($key, $accessToken);
+//        $cache = self::getHandler($host, $port);
+//        if (!\memcache_delete($cache, $key)) {
+//            if (!\memcache_set($cache, $key, null, MEMCACHE_COMPRESSED, -1)) {
+//                \memcache_close($cache);
+//                throw new \Exception("Could not delete key $key from the cache.");
+//            }
+//        }
+//        \memcache_close($cache);
+//        return TRUE;
+        return false;
     }
 
     /**
